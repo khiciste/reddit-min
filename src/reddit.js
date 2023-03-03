@@ -1,3 +1,6 @@
+
+
+
 export default {
   search: function (searchTerm, searchLimit, sortBy) {
     // fetch api of reddit

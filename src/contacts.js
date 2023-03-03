@@ -1,15 +1,25 @@
-import localforage from "localforage"
-import { matchSorter } from "match-sorter"
-import sortBy from "sort-by"
+import localforage from 'localforage'
+import { matchSorter } from 'match-sorter'
+import sortBy from 'sort-by'
 
 export async function getContacts(query) {
   await fakeNetwork(`getContacts:${query}`)
-  let contacts = await localforage.getItem("contacts")
+  let contacts = await localforage.getItem('contacts')
   if (!contacts) contacts = []
   if (query) {
-    contacts = matchSorter(contacts, query, { keys: ["first", "last"] })
+    contacts = matchSorter(contacts, query, { keys: ['first', 'last'] })
   }
-  return contacts.sort(sortBy("last", "createdAt"))
+  return contacts.sort(sortBy('last', 'createdAt'))
+}
+
+// get posts for feed
+export const API_ROOT = 'https://www.reddit.com';
+
+export async function getSubredditPosts(subreddit) {
+  const response = await fetch(`${API_ROOT}${subreddit}.json`)
+  const json = await response.json();
+
+  return json.data.children.map((post) => post.data)
 }
 
 export async function createContact() {
@@ -24,23 +34,23 @@ export async function createContact() {
 
 export async function getContact(id) {
   await fakeNetwork(`contact:${id}`)
-  let contacts = await localforage.getItem("contacts")
+  let contacts = await localforage.getItem('contacts')
   let contact = contacts.find(contact => contact.id === id)
   return contact ?? null
 }
 
 export async function updateContact(id, updates) {
   await fakeNetwork()
-  let contacts = await localforage.getItem("contacts")
+  let contacts = await localforage.getItem('contacts')
   let contact = contacts.find(contact => contact.id === id)
-  if (!contact) throw new Error("No contact found for", id)
+  if (!contact) throw new Error('No contact found for', id)
   Object.assign(contact, updates)
   await set(contacts)
   return contact
 }
 
 export async function deleteContact(id) {
-  let contacts = await localforage.getItem("contacts")
+  let contacts = await localforage.getItem('contacts')
   let index = contacts.findIndex(contact => contact.id === id)
   if (index > -1) {
     contacts.splice(index, 1)
@@ -51,7 +61,7 @@ export async function deleteContact(id) {
 }
 
 function set(contacts) {
-  return localforage.setItem("contacts", contacts)
+  return localforage.setItem('contacts', contacts)
 }
 
 // fake a cache so we don't slow down stuff we've already seen

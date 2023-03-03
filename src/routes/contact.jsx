@@ -2,18 +2,18 @@ import {
   Form, 
   useLoaderData,
   useFetcher,
-} from "react-router-dom"
+} from 'react-router-dom'
 import { 
   getContact,
   updateContact,
-} from "../contacts"
+} from '../contacts'
 
 export async function loader({ params }) {
   const contact = await getContact(params.contactId)
   if (!contact) {
-    throw new Response("", {
+    throw new Response('', {
       status: 404,
-      statusText: "Not Found",
+      statusText: 'Not Found',
     })
   }
   return { contact }
@@ -22,7 +22,7 @@ export async function loader({ params }) {
 export async function action({ request, params }) {
   let formData = await request.formData()
   return updateContact(params.contactId, {
-    favorite: formData.get("favorite") === "true",
+    favorite: formData.get('favorite') === 'true',
   })
 }
 
@@ -30,16 +30,16 @@ export default function Contact() {
   const { contact } = useLoaderData()
 
   // const contact = {
-  //   first: "Your",
-  //   last: "Name",
-  //   avatar: "https://placekitten.com/g/200/200",
-  //   twitter: "your_handle",
-  //   notes: "Some notes",
+  //   first: 'Your',
+  //   last: 'Name',
+  //   avatar: 'https://placekitten.com/g/200/200',
+  //   twitter: 'your_handle',
+  //   notes: 'Some notes',
   //   favorite: true,
   // }
 
   return (
-    <div id="contact">
+    <div id='contact'>
       <div>
         <img
           key={contact.avatar}
@@ -55,14 +55,14 @@ export default function Contact() {
             </>
           ) : (
             <i>No Name</i>
-          )}{" "}
+          )}{' '}
           <Favorite contact={contact} />
         </h1>
 
         {contact.twitter && (
           <p>
             <a
-              target="_blank"
+              target='_blank'
               href={`https://twitter.com/${contact.twitter}`}
             >
               {contact.twitter}
@@ -73,23 +73,23 @@ export default function Contact() {
         {contact.notes && <p>{contact.notes}</p>}
 
         <div>
-          <Form action="edit">
-            <button type="submit">Edit</button>
+          <Form action='edit'>
+            <button type='submit'>Edit</button>
           </Form>
           <Form
-            method="post"
-            action="destroy"
+            method='post'
+            action='destroy'
             onSubmit={(event) => {
               if (
                 !confirm(
-                  "Please confirm you want to delete this record."
+                  'Please confirm you want to delete this record.'
                 )
               ) {
                 event.preventDefault()
               }
             }}
           >
-            <button type="submit">Delete</button>
+            <button type='submit'>Delete</button>
           </Form>
         </div>
       </div>
@@ -101,20 +101,20 @@ function Favorite({ contact }) {
   const fetcher = useFetcher()
   let favorite = contact.favorite
   if (fetcher.formData) {
-    favorite = fetcher.formData.get("favorite") === "true"
+    favorite = fetcher.formData.get('favorite') === 'true'
   }
   return (
-    <fetcher.Form method="post">
+    <fetcher.Form method='post'>
       <button
-        name="favorite"
-        value={favorite ? "false" : "true"}
+        name='favorite'
+        value={favorite ? 'false' : 'true'}
         aria-label={
           favorite
-            ? "Remove from favorites"
-            : "Add to favorites"
+            ? 'Remove from favorites'
+            : 'Add to favorites'
         }
       >
-        {favorite ? "★" : "☆"}
+        {favorite ? '★' : '☆'}
       </button>
     </fetcher.Form>
   )

@@ -1,4 +1,5 @@
-import { useEffect } from "react"
+import { useEffect } from 'react'
+import './root.css'
 import { 
   Outlet, 
   NavLink,
@@ -7,12 +8,12 @@ import {
   redirect,
   useNavigation,
   useSubmit,
-} from "react-router-dom"
-import { getContacts, createContact } from "../contacts"
+} from 'react-router-dom'
+import { getContacts, createContact } from '../contacts'
 
 export async function loader({ request }) {
   const url = new URL(request.url)
-  const q = url.searchParams.get("q")
+  const q = url.searchParams.get('q')
   const contacts = await getContacts(q)
   return { contacts, q }
 }
@@ -29,28 +30,28 @@ export default function Root() {
 
   const searching =
     navigation.location &&
-    new URLSearchParams(navigation.location.search).has("q")
+    new URLSearchParams(navigation.location.search).has('q')
 
   useEffect(() => {
-    document.getElementById("q").value = q
+    document.getElementById('q').value = q
   }, [q])
 
   return (
     <>
-      <div id="sidebar">
+      <div id='sidebar'>
         <h1>
           <img src='../../images/reddit-logo-3500.png' />
           reddit<span className='cool-blue'>min</span>
         </h1>
         <div>
-          <Form id="search-form" role="search">
+          <Form id='search-form' role='search'>
             <input
-              id="q"
-              className={searching ? "loading" : ""}
-              aria-label="Search contacts"
-              placeholder="Search"
-              type="search"
-              name="q"
+              id='q'
+              className={searching ? 'loading' : ''}
+              aria-label='Search contacts'
+              placeholder='Search'
+              type='search'
+              name='q'
               defaultValue={q}
               onChange={(event) => {
                 const isFirstSearch = q == null
@@ -60,17 +61,17 @@ export default function Root() {
               }}
             />
             <div
-              id="search-spinner"
+              id='search-spinner'
               aria-hidden
               hidden={!searching}
             />
             <div
-              className="sr-only"
-              aria-live="polite"
+              className='sr-only'
+              aria-live='polite'
             ></div>
           </Form>
-          <Form method="post">
-            <button type="submit">popular?</button>
+          <Form method='post'>
+            <button type='submit'>popular?</button>
           </Form>
         </div>
         <nav>
@@ -82,10 +83,10 @@ export default function Root() {
                     to={`contacts/${contact.id}`}
                     className={({ isActive, isPending }) =>
                       isActive
-                        ? "active"
+                        ? 'active'
                         : isPending
-                        ? "pending"
-                        : ""
+                        ? 'pending'
+                        : ''
                     }
                   >
                     {contact.first || contact.last ? (
@@ -94,7 +95,7 @@ export default function Root() {
                       </>
                     ) : (
                       <i>No Name</i>
-                    )}{" "}
+                    )}{' '}
                     {contact.favorite && <span>★</span>}
                   </NavLink>
                 </li>
