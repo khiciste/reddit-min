@@ -8,23 +8,24 @@ import {
   redirect,
   useNavigation,
   useSubmit,
+  useSearchParams,
 } from 'react-router-dom'
-import { getContacts, createContact } from '../contacts'
+import { Search, getSubredditPosts } from '../reddit'
 
 export async function loader({ request }) {
-  const url = new URL(request.url)
-  const q = url.searchParams.get('q')
-  const contacts = await getContacts(q)
-  return { contacts, q }
+  let filters = ['filter 3', 'filter 4']
+  let q = ''
+  return { filters, q }
 }
 
-export async function action() {
-  const contact = await createContact()
-  return redirect(`/contacts/${contact.id}/edit`)
+export async function action(searchTerm) {
+  searchTerm = document.getElementById('q').value
+  posts = await Search(`${searchParams}`)
+  return redirect(`/?q=${searchParams}`)
 }
 
 export default function Root() {
-  const { contacts, q } = useLoaderData()
+  const { filters, q } = useLoaderData()
   const navigation = useNavigation()
   const submit = useSubmit()
 
@@ -75,37 +76,13 @@ export default function Root() {
           </Form>
         </div>
         <nav>
-          {contacts.length ? (
-            <ul>
-              {contacts.map((contact) => (
-                <li key={contact.id}>
-                  <NavLink
-                    to={`contacts/${contact.id}`}
-                    className={({ isActive, isPending }) =>
-                      isActive
-                        ? 'active'
-                        : isPending
-                        ? 'pending'
-                        : ''
-                    }
-                  >
-                    {contact.first || contact.last ? (
-                      <>
-                        {contact.first} {contact.last}
-                      </>
-                    ) : (
-                      <i>No Name</i>
-                    )}{' '}
-                    {contact.favorite && <span>★</span>}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>
-              <i>No contacts</i>
-            </p>
-          )}
+          
+          <input type='button'
+                 value='filter 1'
+                 name='filter-1' />
+          <input type='button'
+                 value='filter 2'
+                 name='filter-2' />
         </nav>
       </div>
       <div id='detail' className={ navigation.state === 'loading' ? 'loading' : '' }>
