@@ -1,26 +1,35 @@
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, } from 'react-router-dom'
+import { Search, getSubredditPosts } from '../reddit'
 import Post from '../features/Post'
-import { getSubredditPosts } from '../contacts'
 
-
-const subreddit = '/r/popular'
+let searchTerm = 'popular'
+let posts = {}
 
 // loader for feed data
 export async function loader({ request }) {
-  const posts = await getSubredditPosts(subreddit)
+    const url = new URL(request.url)
+    const q = url.searchParams.get('q')
+  if (q) {
+    console.log(q)
+    posts = await Search(q)
+  }
+  else {
+    console.log(searchTerm)
+    posts = await getSubredditPosts(searchTerm)
+  }
   return posts
 }
 
 
 export default function Index() {
-  const posts = useLoaderData()
+  let posts = useLoaderData()
 
   if (posts.length === 0) {
     return (
-      <div className="error">
-        <h2>No posts matching "{searchTerm}"</h2>
+      <div className='error'>
+        <h2>No posts matching '{searchTerm}'</h2>
       </div>
-    );
+    )
   }
 
   return (
