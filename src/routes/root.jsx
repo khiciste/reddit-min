@@ -10,7 +10,7 @@ import {
   useSubmit,
 } from 'react-router-dom'
 
-export async function loader({ request }) {
+export async function loader() {
   let filters = [{ topic: 'dogs' },
                  { topic: 'golf' },
                  { topic: 'hiking' },
@@ -25,14 +25,7 @@ export async function loader({ request }) {
 }
 
 export async function action() {
-  if (q) {
-    console.log(searchParams)
-    return redirect(`/q=${SearchParams}`)
-  }
-  else if (filters.topic) {
-    console.log(r)
-    return redirect(`/r/${searchParams}`)
-  }
+  return redirect(`/q=${SearchParams}`)
 }
 
 export default function Root() {

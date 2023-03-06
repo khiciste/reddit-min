@@ -1,7 +1,6 @@
 import { useLoaderData } from 'react-router-dom'
 import { search, getSubredditPosts } from '../reddit'
 import Post from '../features/Post'
-import PostLoading from '../features/PostLoading'
 
 export async function loader({ request }) {
   let popular = '/r/popular'
@@ -11,7 +10,7 @@ export async function loader({ request }) {
 
   const url = new URL(request.url)
   const urlString = url.toString()
-  // console.log(`url string: ${urlString}`)
+    // console.log(`url string: ${urlString}`)
   if (urlString.includes('?q=')) {
     q = urlString.slice(urlString.lastIndexOf('?q=') + 3, urlString.length)
   }
