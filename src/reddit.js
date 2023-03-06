@@ -17,10 +17,10 @@ export async function search(searchTerm, searchLimit, sortBy) {
     fetch(
         `https://www.reddit.com/search.json?q=${searchTerm}`
     )
-      .then((res) => res.json())
-      .then((data) => data.data.children.map((data) => data.data))
-      // to get error
-      .catch((err) => console.log(err))
+    .then((res) => res.json())
+    .then((data) => data.data.children.map((data) => data.data))
+    // to get error
+    .catch((err) => console.log(err))
   )
 }
 

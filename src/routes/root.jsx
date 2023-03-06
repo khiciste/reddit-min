@@ -52,7 +52,7 @@ export default function Root() {
     <>
       <div id='sidebar'>
         <h1>
-          <img src='../../images/reddit-logo-3500.png' />
+          <img src='https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png' />
           reddit<span className='cool-blue'>min</span>
         </h1>
         <div>
