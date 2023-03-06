@@ -1,10 +1,8 @@
-const subreddit = 'cars'
-
 // get posts for feed
 export const API_ROOT = 'https://www.reddit.com'
 
 export async function getSubredditPosts(subreddit) {
-  const response = await fetch(`${API_ROOT}/r/${subreddit}.json`)
+  const response = await fetch(`${API_ROOT}${subreddit}.json`)
   const json = await response.json()
 
   return json.data.children.map((post) => post.data)
