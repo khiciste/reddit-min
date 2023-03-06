@@ -48,13 +48,18 @@ export default function Root() {
     document.getElementById('q').value = q
   }, [q])
 
+  function toggleNav() {
+    document.getElementById('sidebar').classList.toggle('hide')
+  }
+
   return (
     <>
-      <div id='sidebar'>
-        <h1>
-          <img src='https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png' />
-          reddit<span className='cool-blue'>min</span>
-        </h1>
+      <div id='header'>
+        <img id='reddit-logo' src='https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png' />
+        <h1>reddit<span className='cool-blue'>min</span></h1>
+        <button id='menu-button' onClick={toggleNav}>menu</button>
+      </div>
+      <div id='sidebar' class='hide'>
         <div>
           <Form id='search-form' role='search'>
             <input
@@ -82,6 +87,7 @@ export default function Root() {
               aria-live='polite'
             ></div>
           </Form>
+          <button id='close-button' onClick={toggleNav}>close</button>
         </div>
         <nav>
           <ul>
@@ -90,6 +96,7 @@ export default function Root() {
                 <NavLink
                   to={`/r/${filter.topic}`}
                   filter={filter.topic}
+                  onClick={toggleNav}
                   className={({ isActive, isPending }) =>
                     isActive
                       ? 'active'
