@@ -8,7 +8,6 @@ import './index.css'
 import Root, { 
   loader as rootLoader,
   action as searchAction,
-  // tagAction as tagAction
 } from './routes/root'
 import ErrorPage from './error-page'
 import Index, {
@@ -22,7 +21,6 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     loader: rootLoader,
     action: searchAction,
-    // action: tagAction,
     children: [
       {
         errorElement: <ErrorPage />,

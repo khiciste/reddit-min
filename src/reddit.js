@@ -8,7 +8,7 @@ export async function getSubredditPosts(subreddit) {
   return json.data.children.map((post) => post.data)
 }
 
-export async function Search(searchTerm, searchLimit, sortBy) {
+export async function search(searchTerm, searchLimit, sortBy) {
   // fetch api of reddit
   return (
     // fetch(

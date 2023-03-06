@@ -25,10 +25,6 @@ export async function loader({ request }) {
 }
 
 export async function action() {
-  // const url = new URL(request.url)
-  // const q = url.searchParams.get('q')
-  // const r = url.searchParams.get('r')
-  // let searchTerm = document.getElementById('q').value
   if (q) {
     console.log(searchParams)
     return redirect(`/q=${SearchParams}`)
