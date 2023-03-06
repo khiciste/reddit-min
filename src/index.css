@@ -17,14 +17,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#feed {
-  position: relative;
-  display: block;
-  margin-left: 30vw;
-  width: 70vw;
-  float: right;
-}
-
 .error {
   display: flex;
   flex-direction: column;
@@ -95,11 +87,11 @@ button:active {
   border-width: 0;
 }
 
-#feed {
+/* #feed {
   flex: 1;
-  padding: 2rem 4rem;
+  padding: 1rem;
   width: 100%;
-}
+} */
 
 #feed.loading {
   opacity: 0.25;

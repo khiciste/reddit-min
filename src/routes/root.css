@@ -40,6 +40,7 @@ body {
 
 #root {
   display: flex;
+  justify-content: flex-start;
   height: 100%;
   width: 100%;
 }
@@ -56,8 +57,8 @@ body {
 }
 
 #sidebar > * {
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 #sidebar h1 {
@@ -207,4 +208,76 @@ i {
 
 p {
   margin: 0;
+}
+
+/* RESPONSIVE DESIGN ===================================== */
+
+@media only screen and (max-width: 480px) {
+  /* hide element on small screens */
+  .hide {
+    display: none !important;
+  }
+}
+
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  width: 100vw;
+}
+#reddit-logo {
+  height: 30px;
+  width: auto;
+  margin: 10px;
+}
+#sidebar {
+  position: absolute;
+  height: 100vh;
+  z-index: 2;
+}
+#menu-button {
+  margin: 10px;
+  height: 30px;
+  padding: 0 10px;
+}
+#close-button {
+  text-align: center;
+  margin: 10px;
+  padding: 5px 10px;
+}
+#feed {
+  position: absolute;
+  display: block;
+  margin-left: 30vw;
+  margin-top: 20vh;
+  width: 70vw;
+  height: 80vh;
+  float: right;
+}
+
+@media only screen and (max-width: 480px) {
+  #header {
+    height: 10vh;
+  }
+  #sidebar {
+    width: 85vw;
+  }
+  #feed {
+    margin-top: 10vh;
+    height: 90vh;
+    width: 100vw;
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 481px) {
+  #menu-button,
+  #close-button {
+    display: none;
+  }
+  #feed {
+    padding: 1rem 4rem 1rem 1rem;
+  }
 }
