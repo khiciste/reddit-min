@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router-dom'
 import { search, getSubredditPosts } from '../reddit'
 import Post from '../features/Post'
+import PostLoading from '../features/PostLoading'
 
 export async function loader({ request }) {
   let popular = '/r/popular'
