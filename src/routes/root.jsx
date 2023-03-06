@@ -8,20 +8,35 @@ import {
   redirect,
   useNavigation,
   useSubmit,
-  useSearchParams,
 } from 'react-router-dom'
-import { Search, getSubredditPosts } from '../reddit'
 
 export async function loader({ request }) {
-  let filters = ['filter 3', 'filter 4']
+  let filters = [{ topic: 'dogs' },
+                 { topic: 'golf' },
+                 { topic: 'hiking' },
+                 { topic: 'cars' },
+                 { topic: 'babes' },
+                 { topic: 'fitness' },
+                 { topic: 'kindness' },
+                 { topic: 'travel' },
+                 { topic: 'sports' },]
   let q = ''
   return { filters, q }
 }
 
-export async function action(searchTerm) {
-  searchTerm = document.getElementById('q').value
-  posts = await Search(`${searchParams}`)
-  return redirect(`/?q=${searchParams}`)
+export async function action() {
+  // const url = new URL(request.url)
+  // const q = url.searchParams.get('q')
+  // const r = url.searchParams.get('r')
+  // let searchTerm = document.getElementById('q').value
+  if (q) {
+    console.log(searchParams)
+    return redirect(`/q=${SearchParams}`)
+  }
+  else if (filters.topic) {
+    console.log(r)
+    return redirect(`/r/${searchParams}`)
+  }
 }
 
 export default function Root() {
@@ -71,21 +86,29 @@ export default function Root() {
               aria-live='polite'
             ></div>
           </Form>
-          <Form method='post'>
-            <button type='submit'>popular?</button>
-          </Form>
         </div>
         <nav>
-          
-          <input type='button'
-                 value='filter 1'
-                 name='filter-1' />
-          <input type='button'
-                 value='filter 2'
-                 name='filter-2' />
+          <ul>
+            {filters.map((filter) => (
+              <li key={filter.topic}>
+                <NavLink
+                  to={`/r/${filter.topic}`}
+                  filter={filter.topic}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? 'active'
+                      : isPending
+                      ? 'pending'
+                      : ''
+                  }>
+                  {filter.topic}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
         </nav>
       </div>
-      <div id='detail' className={ navigation.state === 'loading' ? 'loading' : '' }>
+      <div id='feed' className={ navigation.state === 'loading' ? 'loading' : '' }>
         <Outlet />
       </div>
     </>
