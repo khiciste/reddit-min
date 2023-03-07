@@ -36,6 +36,7 @@ html,
 body {
   background: var(--color-background);
   color: var(--color-text-body);
+  font-family: 'Work Sans';
 }
 
 #root {
