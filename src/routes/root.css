@@ -221,12 +221,9 @@ p {
   height: 100vh;
   z-index: 2;
 }
-#menu-button {
-  margin: 10px;
-  height: 30px;
-  padding: 0 10px;
-}
+#menu-button, 
 #close-button {
+  color: var(--color-cool-blue);
   font-weight: bold;
   text-align: center;
   margin: 10px;
@@ -271,6 +268,15 @@ p {
     display: none;
   }
   #feed {
-    padding: 1rem 2rem 1rem 1rem;
+    padding: 1rem 3rem 1rem 1rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #header {
+    margin-left: 0;
+  }
+  #feed {
+    padding: 1rem 25vw 1rem 1rem;
   }
 }
