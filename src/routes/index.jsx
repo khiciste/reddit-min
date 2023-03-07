@@ -1,10 +1,11 @@
 import { useLoaderData } from 'react-router-dom'
-import { search, getSubredditPosts } from '../reddit'
+import { search, getSubredditPosts, getSubreddits } from '../reddit'
 import Post from '../features/Post'
 
 export async function loader({ request }) {
   let popular = '/r/popular'
   let posts = {}
+  let subreddits = {}
   let q = ''
   let r = ''
 
@@ -22,6 +23,7 @@ export async function loader({ request }) {
     // console.log(`r: ${r}`)
 
   posts = await getSubredditPosts(popular)
+  subreddits = await getSubreddits()
 
   if (q.length > 0) {
     // console.log(`r null/empty, r: ${r}`)

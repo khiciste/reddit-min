@@ -87,14 +87,8 @@ const Post = (props) => {
         </div>
       )
     }
-
     return null
   }
-
-  // let video_playing = document.getElementById(post.resolutions.id)
-  // let audio_playing = document.getElementById(post.resolutions.id + '-audio')
-  // video_playing.onplay  = function() { audio_playing.play()  }
-  // video_playing.onpause = function() { audio_playing.pause() }
 
   return (
     <article key={post.id}>
@@ -151,16 +145,18 @@ const Post = (props) => {
               </span>
               <span>{moment.unix(post.created_utc).fromNow()}</span>
               <span className="post-comments-container">
-                <button
+                {/* <button
                   type="button"
                   className={`icon-action-button ${
                     post.showingComments && 'showing-comments'
                   }`}
                   onClick={() => onToggleComments(post.permalink)}
                   aria-label="Show comments"
-                >
+                > */}
+                <span>
                   <TiMessage className="icon-action" />
-                </button>
+                </span>
+                {/* </button> */}
                 {shortenNumber(post.num_comments, 1)}
               </span>
             </div>
