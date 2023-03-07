@@ -47,7 +47,6 @@ body {
 }
 
 #sidebar {
-  width: 30vw;
   background-color: #f7f7f7;
   border-right: solid 1px #e3e3e3;
   position: fixed;
@@ -61,32 +60,12 @@ body {
   padding-right: 1rem;
 }
 
-#sidebar h1 {
-  color: darkslategray;
-  font-size: 2rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 1rem 2rem;
-  border-top: 1px solid #e3e3e3;
-  order: 1;
-  line-height: 1;
-}
-
 .cool-blue {
   color: hsl(224, 98%, 58%);
 }
 
 .nordic-blue {
   color: rgb(94, 117, 153);
-}
-
-#sidebar h1::before {
-  /* content: url(""); */
-  margin-right: 0.5rem;
-  position: relative;
-  top: 1px;
 }
 
 /* reddit logo */
@@ -225,8 +204,11 @@ p {
   align-items: center;
   height: 80px;
   width: 100vw;
-  margin-left: 30vw;
+  margin-left: 25vw;
   background: whitesmoke;
+}
+#header h1 {
+  color: rgb(60, 60, 60);
 }
 #reddit-logo {
   height: 30px;
@@ -235,6 +217,7 @@ p {
 }
 #sidebar {
   position: absolute;
+  width: 25vw;
   height: 100vh;
   z-index: 2;
 }
@@ -252,9 +235,9 @@ p {
 #feed {
   position: absolute;
   display: block;
-  margin-left: 30vw;
-  margin-top: 20vh;
-  width: 70vw;
+  margin-left: 25vw;
+  margin-top: 80px;
+  width: 75vw;
   height: 80vh;
   float: right;
   background: whitesmoke;
@@ -288,6 +271,6 @@ p {
     display: none;
   }
   #feed {
-    padding: 1rem 4rem 1rem 1rem;
+    padding: 1rem 2rem 1rem 1rem;
   }
 }
